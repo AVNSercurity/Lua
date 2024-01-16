@@ -20,14 +20,14 @@ function removechildintable(cL, bQ)
     end
 end
 function idk(Fruit)
-    for i,s in pairs(FruitList) do
+    for i, s in pairs(FruitList) do
         if Fruit.Name == s then
             return 'Fruit @everyone'
-        else
-            return 'Idk'
         end
     end
+    return 'Idk'
 end
+
 function getInventoryFruits()
     ss = {}
     for k, v in pairs(game:GetService("ReplicatedStorage").Remotes["CommF_"]:InvokeServer("getInventory")) do
@@ -55,9 +55,13 @@ function CheckFruit()
         end
     end
     for k, v in pairs(ss1) do
-        return idk(v)
+        if idk(v) == 'Fruit @everyone' then
+            return 'Fruit @everyone'
+        end
     end 
+    return 'Idk'
 end
+
 local Webhook = {
     ["username"] = "AVN Sercurity 1.0.1",
     ['content'] = CheckFruit(),
