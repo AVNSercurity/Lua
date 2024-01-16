@@ -22,7 +22,7 @@ end
 function idk(Fruit)
     for i,s in pairs(FruitList) do
         if Fruit.Name == s then
-            return 'Fruit Leg @everyone Fruit : '..s
+            return 'Fruit @everyone'
         else
             return 'Idk'
         end
