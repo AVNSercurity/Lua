@@ -48,23 +48,23 @@ function getInventoryFruits()
     return mem
 end
 function CheckFruit()
-    ss1 = {}
+    CheckFruitslot = {}
     for k, v in pairs(game:GetService("ReplicatedStorage").Remotes["CommF_"]:InvokeServer("getInventory")) do
         if v["Type"] == "Blox Fruit" then
-            table.insert(ss1, v["Value"])
+            table.insert(CheckFruitslot, v["Value"])
         end
     end
-    for k, v in pairs(ss1) do
+    for k, v in pairs(CheckFruitslot) do
         if idk(v) == 'Fruit @everyone' then
-            return 'Fruit @everyone'
+            local FruitContent = 'Fruit @everyone'
         end
     end 
-    return 'Idk'
+    FruitContent = 'Idk'
 end
-
+CheckFruit()
 local Webhook = {
     ["username"] = "AVN Sercurity 1.0.1",
-    ['content'] = CheckFruit(),
+    ['content'] = FruitContent,
     ["embeds"] = {
        {
            ["title"] = ">  Webhook Idk",
