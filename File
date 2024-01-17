@@ -38,8 +38,13 @@ function getInventoryFruits()
     end
     return mem
 end
+local ContentSyn = "Huhu"
+if game.Players.LocalPlayer.Data.Level.Value >= LevelPing then
+    local ContentSyn = "@here | Level Đạt Đến Level Đã Chọn : "..game.Players.LocalPlayer.Data.Level.Value
+end
 local Webhook = {
     ["username"] = "AVN Sercurity 1.0.1",
+    ["content"] = ContentSyn,
     ["embeds"] = {
        {
            ["title"] = ">  Webhook Idk",
