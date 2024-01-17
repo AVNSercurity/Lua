@@ -1,0 +1,93 @@
+function getMaxOfNumbers(cK)
+    max = 5000
+    for r, v in pairs(cK) do
+        if v > max then
+            max = v
+        end
+    end
+    for r, v in pairs(cK) do
+        if v >= max then
+            return max
+        end
+    end
+    return max
+end
+function removechildintable(cL, bQ)
+    for r, v in pairs(cL) do
+        if v == bQ then
+            cL[r] = nil
+        end
+    end
+end
+function getInventoryFruits()
+    ss = {}
+    for k, v in pairs(game:GetService("ReplicatedStorage").Remotes["CommF_"]:InvokeServer("getInventory")) do
+        if v["Type"] == "Blox Fruit" then
+            table.insert(ss, v["Value"])
+        end
+    end
+    mem = ""
+    for r, v in pairs(ss) do
+        s2 = getMaxOfNumbers(ss)
+        for k, v in pairs(game:GetService("ReplicatedStorage").Remotes["CommF_"]:InvokeServer("getInventory")) do
+            if v["Type"] == "Blox Fruit" and v["Value"] == s2 then
+                mem = mem .. v["Name"] .. ", "
+            end
+        end
+        removechildintable(ss, s2)
+    end
+    return mem
+end
+local ContentSyn = "Huhu"
+function Ok()
+    for k, v in pairs(game:GetService("ReplicatedStorage").Remotes["CommF_"]:InvokeServer("getInventory")) do
+        if v["Type"] == "Blox Fruit" then
+            for id,kd in pairs(FruitList) do
+             if v == kd then
+                local ContentSyn = "@here Có Trái Ác Quỷ Trong Rương : "..kd
+             end
+            end
+        end
+    end
+end
+
+Ok()
+local Webhook = {
+    ["username"] = "AVN Sercurity 1.0.1",
+    ["content"] = ContentSyn,
+    ["embeds"] = {
+       {
+           ["title"] = ">  Webhook Idk",
+           ["color"] = tonumber(00000000),
+           ["type"] = "rich",
+           ["fields"] =  {
+               {
+                   ["name"] = "Players :",
+                   ["value"] = '```'..game.Players.LocalPlayer.Name..'/12```',
+                   ["inline"] = false
+               },
+               {
+                   ["name"] = "Fruit Players :",
+                   ["value"] = '```'..game.Players.LocalPlayer.Data.DevilFruit.Value..'```',
+                   ["inline"] = false
+               },
+               {
+                   ["name"] = "Store",
+                   ["value"] = '```'..getInventoryFruits()..'```',
+                   ["inline"] = true
+               }
+           },
+           ["image"] = {
+           ["url"] = "https://cdn.discordapp.com/attachments/1095324308240351262/1196804358344548352/standard.gif?ex=65b8f5ea&is=65a680ea&hm=1c17f80b886de5794e8cb0f3e7500d08436e920745ed8dfce53589556e2d507f&",
+           },
+           ["footer"] = {
+               ["text"] = os.date("%A".." // ".."%d".." ".."%B".." ".."%Y".." // ".."%X").." \104\116\116\112\115\58\47\47\100\105\115\99\111\114\100\46\103\103\47\110\88\110\97\81\68\87\74",
+           }
+       }
+   },
+}
+local Data = game:GetService("HttpService"):JSONEncode(Webhook)
+local Head = {["content-type"] = "application/json"}
+Send = http_request or request or HttpPost or syn.request
+local sendhook = {Url = WebhookLink, Body = Data, Method = "POST", Headers = Head}
+Send(sendhook)
