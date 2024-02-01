@@ -38,7 +38,7 @@ local AVNApiWebhook = {Url = Webhook, Body = newdata, Method = "POST", Headers =
 request(AVNApiWebhook)
         end
 else 
-    if WebhookSValue == 0 then
+    if WebhookSValue == 0 or WebhookSValue ~=1 then
         WebhookSValue = 1
         local plrs = game.Players.LocalPlayer
         local api = {
