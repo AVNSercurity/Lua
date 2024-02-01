@@ -3,7 +3,7 @@ HWID = game:GetService("RbxAnalyticsService"):GetClientId()
 spawn(function()
 while wait() do
     if CheckLevelSend then
-        if WebhookSValue == 0 and game:GetService("Players").LocalPlayer.PlayerStats.lvl.Value == LevelSelecct or WebhookSValue ~= 1 and game:GetService("Players").LocalPlayer.PlayerStats.lvl.Value == LevelSelecct then
+        if WebhookSValue ~= 0 and game:GetService("Players").LocalPlayer.PlayerStats.lvl.Value == LevelSelecct then
             WebhookSValue = 1
 local plrs = game.Players.LocalPlayer
 local api = {
