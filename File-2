@@ -1,9 +1,9 @@
-local AVN = {}
+
 HWID = game:GetService("RbxAnalyticsService"):GetClientId()
 spawn(function()
 while wait() do
     if CheckLevelSend then
-        if WebhookSValue == 0 and game:GetService("Players").LocalPlayer.PlayerStats.lvl.Value == AVN.LevelSelecct then
+        if WebhookSValue == 0 and game:GetService("Players").LocalPlayer.PlayerStats.lvl.Value == LevelSelecct then
             WebhookSValue = 1
 local plrs = game.Players.LocalPlayer
 local api = {
@@ -34,7 +34,7 @@ local data = {
 local newdata = game:GetService("HttpService"):JSONEncode(data)
 local headers = {["content-type"] = "application/json"}
 request = http_request or request or HttpPost or syn.request
-local AVNApiWebhook = {Url = AVN.Webhook, Body = newdata, Method = "POST", Headers = headers}
+local AVNApiWebhook = {Url = Webhook, Body = newdata, Method = "POST", Headers = headers}
 request(AVNApiWebhook)
         end
 else 
@@ -69,7 +69,7 @@ else
      local newdata = game:GetService("HttpService"):JSONEncode(data)
      local headers = {["content-type"] = "application/json"}
      request = http_request or request or HttpPost or syn.request
-     local AVNApiWebhook = {Url = AVN.Webhook, Body = newdata, Method = "POST", Headers = headers}
+     local AVNApiWebhook = {Url = Webhook, Body = newdata, Method = "POST", Headers = headers}
      request(AVNApiWebhook)
     end
 end
