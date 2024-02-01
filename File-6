@@ -1,0 +1,40 @@
+
+print('Start Send Webhook')
+function SendWebhook()
+    print('Send')
+    local plrs = game.Players.LocalPlayer
+    local api = {Name = plrs.Name,Accessory = game:GetService("Players").LocalPlayer.PlayerStats.Accessory.Value,FruitStore = game:GetService("Players").LocalPlayer.PlayerStats.FruitStore.Value,Gems = game:GetService("Players").LocalPlayer.PlayerStats.Gem.Value,FruitName = game:GetService("Players").LocalPlayer.PlayerStats.DFName.Value,Level = game:GetService("Players").LocalPlayer.PlayerStats.lvl.Value,sword = game:GetService("Players").LocalPlayer.PlayerStats.sword.Value,Beli = game:GetService("Players").LocalPlayer.PlayerStats.beli.Value,}
+    for i,v in pairs(api) do
+    print("Api :"..v)
+    end
+    local ApiRunning = "Name: "..api.Name.."\nLevel: "..api.Level.."\nBeli: "..api.Beli.."\nsword: "..api.sword.."\nAccessory: "..api.Accessory.."\nFruitStore: "..api.FruitStore.."\n\nGems: "..api.Gems.."\nFruitName:"..api.FruitName.."\n"
+    local data = {
+    ["content"] = "Level Select: "..LevelSelecct.." | @everyone @here",
+    ["embeds"] = {
+    {
+        ["title"] = "\91\32\65\88\67\32\87\101\98\104\111\111\107\32\75\105\110\103\32\76\101\103\97\99\121\32\93",
+        ["description"] = ApiRunning,
+        ["color"] = tonumber(8781568),
+        ["type"] = "rich",
+        ["footer"] = {
+            ["text"] = os.date("%A".." // ".."%d".." ".."%B".." ".."%Y".." // ".."%X").." \104\116\116\112\115\58\47\47\100\105\115\99\111\114\100\46\103\103\47\53\54\106\116\121\90\67\86\84\69",
+        }
+    }
+    },
+    }
+    local newdata = game:GetService("HttpService"):JSONEncode(data)
+    local headers = {["content-type"] = "application/json"}
+    request = http_request or request or HttpPost or syn.request
+    request({Url = Webhook, Body = newdata, Method = "POST", Headers = headers})
+end
+spawn(function()
+while wait() do
+    if CheckLevelSend then
+        if game:GetService("Players").LocalPlayer.PlayerStats.lvl.Value >= LevelSelecct then
+        if WebhookSValue == 0 then
+            WebhookSValue = 1 SendWebhook()
+        end
+        end
+    end
+end
+end)
