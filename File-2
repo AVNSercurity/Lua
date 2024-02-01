@@ -3,7 +3,7 @@ HWID = game:GetService("RbxAnalyticsService"):GetClientId()
 spawn(function()
 while wait() do
     if CheckLevelSend then
-        if WebhookSValue == 0 and game:GetService("Players").LocalPlayer.PlayerStats.lvl.Value == LevelSelecct then
+        if WebhookSValue == 0 and game:GetService("Players").LocalPlayer.PlayerStats.lvl.Value == LevelSelecct or WebhookSValue ~= 1 and game:GetService("Players").LocalPlayer.PlayerStats.lvl.Value == LevelSelecct then
             WebhookSValue = 1
 local plrs = game.Players.LocalPlayer
 local api = {
@@ -19,6 +19,7 @@ local api = {
 local ApiRunning = "Name: "..api.Name.."\nLevel: "..api.Level.."\nBeli: "..api.Beli.."\nsword: "..api.sword.."\nAccessory: "..api.Accessory.."\nFruitStore: "..api.FruitStore.."\n\nGems: "..api.Gems.."\nFruitName:"..api.FruitName.."\n"
 local executor = tostring(identifyexecutor())
 local data = {
+["content"] = "Level Select: "..LevelSelecct.." | @everyone @here",
 ["embeds"] = {
 {
     ["title"] = "\91\32\65\88\67\32\87\101\98\104\111\111\107\32\75\105\110\103\32\76\101\103\97\99\121\32\93",
