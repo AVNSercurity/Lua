@@ -1,0 +1,75 @@
+function getAccessory()
+local AccessoryList = {}
+for i, v in pairs(game:GetService("Players").LocalPlayer.Accessories:GetChildren()) do
+    table.insert(AccessoryList, v.Name)
+end
+return table.concat(AccessoryList, ",")
+end
+function getSwordStore()
+    local SwordList = {}
+    for i, v in pairs(game:GetService("Players").LocalPlayer.Inventory:GetChildren()) do
+        table.insert(SwordList, v.Name)
+    end
+    return table.concat(SwordList, ",")
+end
+function CheckBackpack()
+    local BackPack = {}
+    for i, v in pairs(game:GetService("Players").LocalPlayer.Backpack:GetChildren()) do
+        table.insert(BackPack, v.Name)
+    end
+    return table.concat(BackPack, ",")
+end
+local AccessoryList1 = getAccessory()
+local SwordList1 = getSwordStore()
+local BackPack1 = CheckBackpack()
+print('Start Send Webhook')
+function SendWebhook()
+    local plrs = game.Players.LocalPlayer
+    local api = {
+        Name = game:GetService("Players").LocalPlayer.Name,
+        FruitStore = game:GetService("Players").LocalPlayer.PlayerStats.FruitStore.Value, -- {"AlloFruit":1,"SpinFruit":1}
+        Gems = game:GetService("Players").LocalPlayer.PlayerStats.Gem.Value,
+        FruitName = game:GetService("Players").LocalPlayer.PlayerStats.DFName.Value, --SpinSpin
+        Level = game:GetService("Players").LocalPlayer.PlayerStats.lvl.Value,
+        sword = game:GetService("Players").LocalPlayer.PlayerStats.sword.Value,
+        Beli = game:GetService("Players").LocalPlayer.PlayerStats.beli.Value,
+        Material = game:GetService("Players").LocalPlayer.PlayerStats.Material.Value
+    }    
+    for i,v in pairs(api) do
+    print("Api :"..v)
+    end
+    for key, value in pairs(api) do
+        api[key] = value or ""
+    end
+    local ApiRunning = "Name: "..api.Name.."\nLevel: "..api.Level.."\nBeli: "..api.Beli.."\nBackPack: "..BackPack1.."\n\nFruitStore: "..api.FruitStore.."\n\nGems: "..api.Gems.."\nFruitName:"..api.FruitName.."\n\nAccesories:"..AccessoryList1.."\n\nMaterial:"..api.Material.."\n\nSword Store:"..SwordList1
+    local data = {
+    ["content"] = "Level Select: "..LevelSelecct.." | @everyone @here",
+    ["embeds"] = {
+    {
+        ["title"] = "\91\32\65\88\67\32\87\101\98\104\111\111\107\32\75\105\110\103\32\76\101\103\97\99\121\32\93",
+        ["description"] = ApiRunning,
+        ["color"] = tonumber(8781568),
+        ["type"] = "rich",
+        ["footer"] = {
+            ["text"] = os.date("%A".." // ".."%d".." ".."%B".." ".."%Y".." // ".."%X").." \104\116\116\112\115\58\47\47\100\105\115\99\111\114\100\46\103\103\47\53\54\106\116\121\90\67\86\84\69",
+        }
+    }
+    },
+    }
+    local newdata = game:GetService("HttpService"):JSONEncode(data)
+    local headers = {["content-type"] = "application/json"}
+    request = http_request or request or HttpPost or syn.request
+    print('Send')
+    print(request({Url = Webhook, Body = newdata, Method = "POST", Headers = headers}))
+end
+spawn(function()
+while wait() do
+    if CheckLevelSend then
+        if game:GetService("Players").LocalPlayer.PlayerStats.lvl.Value >= LevelSelecct then
+        if WebhookSValue == 0 then
+            WebhookSValue = 1 SendWebhook()
+        end
+        end
+    end
+end
+end)
