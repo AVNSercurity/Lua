@@ -645,10 +645,12 @@ function OrionLib:MakeWindow(WindowConfig)
 		WindowIcon.Parent = MainWindow.TopBar
 	end	
 
+	MakeDraggable(DragPoint, MainWindow)
+
     local PKL = Instance.new("ScreenGui")
     local IMGBU = Instance.new("ImageButton")
     local UICCC = Instance.new("UICorner")
-    PKL.Name = ""
+    PKL.Name = "LOL"
     PKL.Parent = game.CoreGui or game.Players.LocalPlayer.PlayerGui
     PKL.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
     IMGBU.Parent = PKL
@@ -665,9 +667,6 @@ function OrionLib:MakeWindow(WindowConfig)
 		UIHidden = true
         PKL.Visible = false
     end)
-
-	MakeDraggable(DragPoint, MainWindow)
-
 	AddConnection(CloseBtn.MouseButton1Up, function()
         PKL.Visible = true
 		WindowConfig.CloseCallback()
