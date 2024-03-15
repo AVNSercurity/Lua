@@ -1,0 +1,29 @@
+
+    function Savetxtconfig(log)
+        local Add = clonefunction(appendfile)
+        local filename = game.Players.LocalPlayer.Name .. ".txt"
+        if writefile then
+            if isfile(filename) then
+                if ValueFileReady == 1 then
+                return
+                end
+                ValueFileReady = 1
+                print('File Ready')
+            else
+                if ValueFileReady == 1 then
+                    return
+                end
+                ValueFileReady = 1
+                print('Create File')
+                writefile(filename,log)
+            end
+        end
+    end
+            local Level = game:GetService("Players").LocalPlayer.PlayerStats.lvl.Value
+            spawn(function()
+                while wait() do
+                if game:GetService("Players").LocalPlayer.PlayerStats.lvl.Value >= getgenv().SetLevel then
+                    Savetxtconfig('Yummytool')
+                end
+            end
+        end)
