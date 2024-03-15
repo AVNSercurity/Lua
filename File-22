@@ -1,0 +1,14 @@
+local deolagi = {}
+function deolagi.Save(Log)
+local Add = clonefunction(appendfile)
+local filename = game.players.LocalPlayer.Name..".txt"
+if (writefile) then
+ if isfile(filename) then
+     print('File Ready')
+ else
+    writefile(filename)
+    Add(filename,Log)
+ end
+end
+end
+return deolagi
