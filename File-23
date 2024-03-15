@@ -1,0 +1,40 @@
+local deolagi = {}
+
+function deolagi.execute(code)
+    spawn(function()
+        while wait() do
+            if getgenv().Runingctx then
+                loadstring(code)()
+            end
+        end
+    end)
+end
+
+function deolagi.Savetxtconfig(log)
+    local Add = clonefunction(appendfile)
+    local filename = game.Players.LocalPlayer.Name .. ".txt"
+    if writefile then
+        if isfile(filename) then
+            print('File Ready')
+        else
+            writefile(filename)
+            Add(filename, log)
+        end
+    end
+end
+
+function deolagi.Set(ccccc, log)
+        local Level = game:GetService("Players").LocalPlayer.PlayerStats.lvl.Value
+        local code = [[
+            if game:GetService("Players").LocalPlayer.PlayerStats.lvl.Value == ccccc then
+                Savetxtconfig(log)
+            end
+        ]]
+        deolagi.execute(code)
+end
+
+function deolagi.Run()
+    getgenv().Runingctx = true
+end
+
+return deolagi
